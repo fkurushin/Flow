@@ -136,9 +136,10 @@ void readTree(TString inListName, TString outFileName)
 
 			std::vector<float> resolution;
 
-			std::vector<std::vector<float>> negative_phi(10);
-			std::vector<std::vector<float>> positive_phi(10);
-
+			std::vector<std::vector<Float_t>> negative_phi(10);
+			std::vector<std::vector<Float_t>> positive_phi(10);
+			std::vector<Float_t> Psi_EP_posVec(10);
+			std::vector<Float_t> Psi_EP_negVec(10);
 
 
 			TH1F *h1st = new TH1F("h1temp", "Flow, #phi > 0 and #Psi_{EP} < 0", 10, 0.0, 10);
@@ -223,7 +224,9 @@ void readTree(TString inListName, TString outFileName)
 
 					Psi_EP_neg = PSI_EP(Qy_neg, Qx_neg);
 					Psi_EP_pos = PSI_EP(Qy_pos, Qx_pos);
-
+					
+					Psi_EP_negVec.append(Psi_EP_neg);
+					Psi_EP_posVec.append(Psi_EP_pos);
 					if (flag) {
 						if (qW != 0) {
 
@@ -252,8 +255,8 @@ void readTree(TString inListName, TString outFileName)
 
 
 	for (Int_t i = 0; i < 10; i++) {
-		vnobs_neg = vnobs(positive_phi[i], Psi_EP_neg);
-		vnobs_pos = vnobs(negative_phi[i], Psi_EP_pos);
+		vnobs_neg = vnobs(positive_phi[i], Psi_EP_negVec[i]);
+		vnobs_pos = vnobs(negative_phi[i], Psi_EP_posVec[i]);
 		//TMath::sqrt(hist[i]->GetMean()); Resolution
 		h1st->SetBinContent(i + 1, vnobs_neg / TMath::sqrt(hist[i]->GetMean()));
 		h2st->SetBinContent(i + 1, vnobs_pos / TMath::sqrt(hist[i]->GetMean()));

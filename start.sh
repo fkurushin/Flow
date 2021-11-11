@@ -4,7 +4,7 @@
 #Определяет рабочую директорию для задания. Если не задана, то рабочей является текущая директория:
 
 # Эта папка должна существовать 
-#SBATCH -D /mnt/pool/rhic/1/fkurushin/McPicoReader/Resolution/TMP
+#SBATCH -D /mnt/pool/rhic/1/fkurushin/McPicoReader/Flow/TMP
 
 #Определяет имя задачи:
 #SBATCH -J readTree
@@ -25,8 +25,8 @@
 
 #Эти папки тоже должны существовать
 #Задаются имена файлов ошибок (stderr), и стандартного вывода (stdout).
-#SBATCH -o /mnt/pool/rhic/1/fkurushin/McPicoReader/Resolution/SGE_OUT/slurm_%A_%a.out
-#SBATCH -e /mnt/pool/rhic/1/fkurushin/McPicoReader/Resolution/SGE_OUT/slurm_%A_%a.err
+#SBATCH -o /mnt/pool/rhic/1/fkurushin/McPicoReader/Flow/SGE_OUT/slurm_%A_%a.out
+#SBATCH -e /mnt/pool/rhic/1/fkurushin/McPicoReader/Flow/SGE_OUT/slurm_%A_%a.err
 
 
 #This will be set to the first job ID of the array.
@@ -35,7 +35,7 @@ export JOB_ID=$SLURM_ARRAY_JOB_ID
 export TASK_ID=$SLURM_ARRAY_TASK_ID
 
 
-export MAIN_DIR=/mnt/pool/rhic/1/fkurushin/McPicoReader/Resolution
+export MAIN_DIR=/mnt/pool/rhic/1/fkurushin/McPicoReader/Flow
 export FILELIST_DIR=${MAIN_DIR}/lists
 
 #Команды ниже копируют аутпут после выполнения команд в кавычках 
